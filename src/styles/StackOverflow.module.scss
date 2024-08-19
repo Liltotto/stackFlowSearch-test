@@ -1,27 +1,26 @@
 .body {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .preAndCode {
-    pre {
-        width: auto;
-        max-height: 600px;
-        scrollbar-color: hsla(0,0%,0%,0.2) transparent;
-        background-color: hsl(210,8%,95%);
-        padding: 12px;
-        overflow: auto;
-        border-radius: 6px;
+  pre {
+    width: auto;
+    max-height: 600px;
+    scrollbar-color: hsla(0, 0%, 0%, 0.2) transparent;
+    background-color: hsl(210, 8%, 95%);
+    padding: 12px;
+    overflow: auto;
+    border-radius: 6px;
 
-        code {
-            scrollbar-color: hsla(0,0%,0%,0.2) transparent;            
-            color: black;
-            font-size: 13px;
-            line-height: 1.3;
-            margin: 0;
-            overflow: auto;
-          
-        }
+    code {
+      scrollbar-color: hsla(0, 0%, 0%, 0.2) transparent;
+      color: black;
+      font-size: 13px;
+      line-height: 1.3;
+      margin: 0;
+      overflow: auto;
     }
+  }
 }

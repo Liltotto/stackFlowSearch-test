@@ -110,7 +110,7 @@ export const MyPagination = ({
     return null;
   }
 
-  if(totalPages === 1) {
+  if (totalPages === 1) {
     return pages;
   }
 

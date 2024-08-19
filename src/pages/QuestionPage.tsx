@@ -8,32 +8,15 @@ import { useQuery } from "@tanstack/react-query";
 import { MainLoader } from "../components/UI/Loader";
 import AnswerList from "../components/AnswerList";
 import QuestionInfo from "../components/QuestionInfo";
-
+import { useQuestionInfo } from "../hooks/useQuestionInfo";
+import { useAnswersOfQuestion } from "../hooks/useAnswersOfQuestion";
 
 const QuestionPage = () => {
   const { questionId } = useParams<{ questionId: string }>();
 
-  const {
-    data: questionData,
-    isLoading: isQuestionLoading,
-    isError: isQuestionError,
-    error: questionError,
-  } = useQuery({
-    queryKey: ["question", questionId],
-    queryFn: () => getQuestion(Number(questionId)),
-    enabled: !!questionId,
-  });
+  const { questionData, isQuestionLoading, isQuestionError, questionError, } = useQuestionInfo(questionId);
 
-  const {
-    data: answersData,
-    isLoading: isAnswersLoading,
-    isError: isAnswersError,
-    error: answersError,
-  } = useQuery({
-    queryKey: ["answers", questionId],
-    queryFn: () => getQuestionAnswers(Number(questionId)),
-    enabled: !!questionId, 
-  });
+  const { answersData, isAnswersLoading, isAnswersError, answersError, } = useAnswersOfQuestion(questionId);
 
   const answersTitle = (question: Question) => {
     if (!question.answer_count) return;
@@ -44,8 +27,14 @@ const QuestionPage = () => {
     return `${question.answer_count} Answers`;
   };
 
-  if (isQuestionError) return <div className="m-auto text-3xl">{(questionError as Error).message}</div>;
-  if (isAnswersError) return <div className="m-auto text-3xl">{(answersError as Error).message}</div>;
+  if (isQuestionError)
+    return (
+      <div className="m-auto text-3xl">{(questionError as Error).message}</div>
+    );
+  if (isAnswersError)
+    return (
+      <div className="m-auto text-3xl">{(answersError as Error).message}</div>
+    );
 
   if (isQuestionLoading || isAnswersLoading) return <MainLoader />;
 

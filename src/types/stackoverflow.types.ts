@@ -2,8 +2,8 @@ export interface Question {
   question_id: number;
   title: string;
   link: string;
-  body: string; 
-  tags: string[]; 
+  body: string;
+  tags: string[];
   answer_count: number;
   creation_date: number;
   owner: {
