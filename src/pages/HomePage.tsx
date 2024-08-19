@@ -7,7 +7,6 @@ import { getPageCount } from "../utils/helpers/pagesCount";
 import { PAGE_SIZE } from "../utils/constants";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { MainLoader, MiniLoader} from "../components/UI/Loader";
-import BurgerMenu from "../components/BurgerMenu";
 
 const HomePage = () => {
   const [activeQuery, setActiveQuery] = useState("");

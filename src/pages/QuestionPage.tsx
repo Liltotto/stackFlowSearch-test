@@ -8,7 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 import { MainLoader } from "../components/UI/Loader";
 import AnswerList from "../components/AnswerList";
 import QuestionInfo from "../components/QuestionInfo";
-import BurgerMenu from "../components/BurgerMenu";
 
 
 const QuestionPage = () => {

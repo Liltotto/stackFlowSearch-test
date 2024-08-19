@@ -52,7 +52,7 @@ const BurgerMenu = () => {
                 <li key={id} className="flex justify-between items-center gap-10">
                   <Link
                     to={`/questions/${id}`}
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:underline truncate"
                   >
                     {title}
                   </Link>
