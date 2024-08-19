@@ -31,10 +31,10 @@ const QuestionList = ({ questions }: QuestionListProps) => {
     <table className="min-w-full table-auto">
       <thead>
         <th className="px-4 py-2 text-left w-8/12">Title</th>
-          <th className="px-4 py-2 w-1/12 text-center">Answers</th>
-          <th className="px-4 py-2 w-2/12 text-center">Author</th>
-          <th className="px-4 py-2 w-1/12 text-center">Created</th>
-          <th className="px-4 py-2 w-16 text-center">Favorite</th>
+        <th className="px-4 py-2 w-1/12 text-center">Answers</th>
+        <th className="px-4 py-2 w-2/12 text-center">Author</th>
+        <th className="px-4 py-2 w-1/12 text-center">Created</th>
+        <th className="px-4 py-2 w-16 text-center">Favorite</th>
       </thead>
       <tbody>
         {questions.map((question) => (
@@ -42,7 +42,7 @@ const QuestionList = ({ questions }: QuestionListProps) => {
             <td className="px-4 py-2">
               <Link
                 to={`/questions/${question.question_id}`}
-                 className="text-blue-500 hover:underline block truncate max-w-3xl"
+                className="text-blue-500 hover:underline block truncate max-w-3xl"
               >
                 {question.title}
               </Link>

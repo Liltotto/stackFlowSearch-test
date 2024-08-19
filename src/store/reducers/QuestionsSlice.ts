@@ -6,7 +6,9 @@ interface QuestionsState {
 }
 
 const initialState = {
-  questions: [] as QuestionsState[],
+  questions: JSON.parse(
+    sessionStorage.getItem("questions") || "[]"
+  ) as QuestionsState[],
 };
 
 export const questionsSlice = createSlice({
@@ -15,12 +17,15 @@ export const questionsSlice = createSlice({
   reducers: {
     setQuestion: (state, action: PayloadAction<QuestionsState>) => {
       state.questions.push(action.payload);
+      sessionStorage.setItem("questions", JSON.stringify(state.questions));
     },
 
     removeQuestion: (state, action: PayloadAction<number>) => {
       state.questions = state.questions.filter(
         (question) => question.id !== action.payload
       );
+
+      sessionStorage.setItem("questions", JSON.stringify(state.questions));
     },
   },
 });

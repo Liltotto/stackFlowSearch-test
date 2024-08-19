@@ -5,7 +5,10 @@ import { searchQuestions } from "../services/stackoverflowService";
 export const useQuestions = (
   activeQuery: string,
   page: number,
-  filter: boolean | null
+  isAccepted: boolean | null,
+  order: "asc" | "desc",
+  answers: number | null,
+  views: number | null
 ) => {
   const {
     data: questionsData,
@@ -15,7 +18,16 @@ export const useQuestions = (
     refetch,
   } = useQuery({
     queryKey: ["questions", activeQuery, page],
-    queryFn: () => searchQuestions(activeQuery, page, PAGE_SIZE, filter),
+    queryFn: () =>
+      searchQuestions(
+        activeQuery,
+        page,
+        PAGE_SIZE,
+        isAccepted,
+        order,
+        answers,
+        views
+      ),
     enabled: false,
     placeholderData: keepPreviousData,
   });

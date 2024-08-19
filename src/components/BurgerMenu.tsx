@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const favoriteQuestions = useAppSelector((state) =>
-    state.questionsReducer.questions
+  const favoriteQuestions = useAppSelector(
+    (state) => state.questionsReducer.questions
   );
 
   const toggleMenu = () => {
@@ -48,8 +48,11 @@ const BurgerMenu = () => {
           <h2 className="text-2xl font-semibold mb-4">Favorites</h2>
           <ul className="space-y-4">
             {favoriteQuestions.length > 0 ? (
-              favoriteQuestions.map(({id, title}) => (
-                <li key={id} className="flex justify-between items-center gap-10">
+              favoriteQuestions.map(({ id, title }) => (
+                <li
+                  key={id}
+                  className="flex justify-between items-center gap-10"
+                >
                   <Link
                     to={`/questions/${id}`}
                     className="text-blue-500 hover:underline truncate"

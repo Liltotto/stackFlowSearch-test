@@ -15,11 +15,14 @@ export const searchQuestions = async (
   query: string,
   page = 1,
   pageSize = 15,
-  accepted: boolean | null
+  accepted: boolean | null,
+  order: "desc" | "asc" = "desc",
+  answers: number | null = null,
+  views: number | null = null
 ): Promise<SearchResultsProps> => {
   const response = await http.get(`/search/advanced`, {
     params: {
-      order: "desc",
+      order,
       sort: "activity",
       q: query,
       site: "stackoverflow",
@@ -27,6 +30,8 @@ export const searchQuestions = async (
       pagesize: pageSize,
       filter: "!6WPIomnMOSbdO",
       accepted,
+      answers,
+      views,
     },
   });
 
