@@ -3,7 +3,7 @@ import { Question, Answer, SearchResultsProps } from "../types/stackoverflow.typ
 
 const API_BASE_URL = "https://api.stackexchange.com/2.3";
 
-export const searchQuestions = async (query: string, page = 1, pageSize = 15, is_answered: boolean | null = null): Promise<SearchResultsProps> => {
+export const searchQuestions = async (query: string, page = 1, pageSize = 15, accepted: boolean | null): Promise<SearchResultsProps> => {
   const response = await axios.get(`${API_BASE_URL}/search/advanced`, {
     params: {
       order: "desc",
@@ -13,7 +13,7 @@ export const searchQuestions = async (query: string, page = 1, pageSize = 15, is
       page,
       pagesize: pageSize,
       filter: "!6WPIomnMOSbdO",
-      is_answered
+      accepted
     },
   });
 

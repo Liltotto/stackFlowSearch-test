@@ -6,67 +6,62 @@ import { MyPagination } from "../components/UI/MyPagination";
 import { getPageCount } from "../utils/helpers/pagesCount";
 import { PAGE_SIZE } from "../utils/constants";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { MainLoader, MiniLoader} from "../components/UI/Loader";
 
 const HomePage = () => {
   const [activeQuery, setActiveQuery] = useState("");
   const [page, setPage] = useState<number>(1);
   const [filter, setFilter] = useState<boolean | null>(null);
-  // const queryClient = useQueryClient();
 
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isLoading, isError, isFetching, refetch } = useQuery({
     queryKey: ["questions", activeQuery, page],
     queryFn: () => searchQuestions(activeQuery, page, PAGE_SIZE, filter),
-    enabled: false, // Запрос не будет выполняться автоматически
+    enabled: false, 
     placeholderData: keepPreviousData,
   });
 
   const questions = data?.items || [];
-  // const filteredQuestions = (data?.items || []).filter((question) => {
-  //   if (filter === "with-answer") {
-  //     return question.answer_count > 0;
-  //   }
-  //   if (filter === "without-answer") {
-  //     return question.answer_count === 0;
-  //   }
-  //   return true; // Возвращаем все вопросы, если выбран фильтр "-"
-  // });
   const totalPages = Math.min(15, getPageCount(data?.total!, PAGE_SIZE));
 
-  console.log("object");
+  useEffect(() => {
+    console.log(isFetching);
+  }, [isFetching]);
 
   const handleSearch = (newQuery: string, newFilter: boolean | null) => {
     setActiveQuery(newQuery);
     setFilter(newFilter);
-    setPage(1); // Сброс страницы при новом поиске
+    setPage(1); 
   };
 
   useEffect(() => {
     if (activeQuery) {
-      refetch(); // Выполнение запроса при изменении страницы
+      refetch();
     }
-  }, [activeQuery, page, refetch]);
+  }, [activeQuery, page, refetch, filter]);
 
   return (
     <div className="container mx-auto py-8 flex flex-col min-h-screen">
       <h1 className="text-2xl mb-4">Search Stack Overflow</h1>
       <SearchForm onSearch={handleSearch} />
-
       {isLoading ? (
-        <div>Loading...</div>
+        <MainLoader />
       ) : isError ? (
-        <div>Error loading questions</div>
+        <div className="m-auto text-3xl">Error loading questions</div>
       ) : questions.length ? (
         <>
           <div className="flex-grow mt-8">
             <QuestionList questions={questions} />
           </div>
 
-          <div className="mb-16 self-center">
-            <MyPagination
-              currentPage={page}
-              setCurrentPage={setPage}
-              totalPages={totalPages}
-            />
+          <div className="flex flex-col items-center gap-2">
+            {isFetching && <MiniLoader />}
+            <div className="mb-16">
+              <MyPagination
+                currentPage={page}
+                setCurrentPage={setPage}
+                totalPages={totalPages}
+              />
+            </div>
           </div>
         </>
       ) : activeQuery ? (

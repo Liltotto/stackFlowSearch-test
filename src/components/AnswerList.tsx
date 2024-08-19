@@ -19,7 +19,7 @@ const AnswerList = ({ answers }: AnswerListProps) => {
           key={answer.answer_id}
           className={`${index ? "border-t" : ""} border-gray-200 pt-4 mt-4`}
         >
-          <div className="flex items-center space-x-4 text-gray-600 mb-4">
+          <div className="flex items-center space-x-4 text-gray-600 mb-6">
             <a
               href={answer.owner.link}
               target="_blank"
