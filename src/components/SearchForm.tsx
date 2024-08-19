@@ -16,7 +16,9 @@ const SearchForm = ({ onSearch }: SearchFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="flex space-x-2 justify-center">
       <select
-        value={filter === null ? "" : filter ? "with-accepted" : "without-accepted"}
+        value={
+          filter === null ? "" : filter ? "with-accepted" : "without-accepted"
+        }
         onChange={(e) =>
           setFilter(
             e.target.value === "with-accepted"

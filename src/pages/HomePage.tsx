@@ -7,6 +7,7 @@ import { getPageCount } from "../utils/helpers/pagesCount";
 import { PAGE_SIZE } from "../utils/constants";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { MainLoader, MiniLoader} from "../components/UI/Loader";
+import BurgerMenu from "../components/BurgerMenu";
 
 const HomePage = () => {
   const [activeQuery, setActiveQuery] = useState("");
@@ -40,8 +41,7 @@ const HomePage = () => {
   }, [activeQuery, page, refetch, filter]);
 
   return (
-    <div className="container mx-auto py-8 flex flex-col min-h-screen">
-      <h1 className="text-2xl mb-4">Search Stack Overflow</h1>
+    <div className="container mx-auto py-16 flex flex-col min-h-screen">
       <SearchForm onSearch={handleSearch} />
       {isLoading ? (
         <MainLoader />
@@ -49,7 +49,7 @@ const HomePage = () => {
         <div className="m-auto text-3xl">Error loading questions</div>
       ) : questions.length ? (
         <>
-          <div className="flex-grow mt-8">
+          <div className="flex-grow mt-12">
             <QuestionList questions={questions} />
           </div>
 
