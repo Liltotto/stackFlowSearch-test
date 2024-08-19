@@ -1,22 +1,19 @@
 import { useParams } from "react-router-dom";
 import { Question } from "../types/stackoverflow.types";
-import {
-  getQuestion,
-  getQuestionAnswers,
-} from "../services/stackoverflowService";
-import { useQuery } from "@tanstack/react-query";
 import { MainLoader } from "../components/UI/Loader";
-import AnswerList from "../components/AnswerList";
-import QuestionInfo from "../components/QuestionInfo";
 import { useQuestionInfo } from "../hooks/useQuestionInfo";
 import { useAnswersOfQuestion } from "../hooks/useAnswersOfQuestion";
+import AnswerList from "../components/AnswerList";
+import QuestionInfo from "../components/QuestionInfo";
 
 const QuestionPage = () => {
   const { questionId } = useParams<{ questionId: string }>();
 
-  const { questionData, isQuestionLoading, isQuestionError, questionError, } = useQuestionInfo(questionId);
+  const { questionData, isQuestionLoading, isQuestionError, questionError } =
+    useQuestionInfo(questionId);
 
-  const { answersData, isAnswersLoading, isAnswersError, answersError, } = useAnswersOfQuestion(questionId);
+  const { answersData, isAnswersLoading, isAnswersError, answersError } =
+    useAnswersOfQuestion(questionId);
 
   const answersTitle = (question: Question) => {
     if (!question.answer_count) return;

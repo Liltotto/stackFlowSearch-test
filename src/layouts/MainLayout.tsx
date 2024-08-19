@@ -7,7 +7,9 @@ const MainLayout = () => {
     <div className="container mx-auto flex flex-col items-center">
       <div>
         <Link to="/">
-          <h1 className="fixed top-0 left-0 text-2xl p-4">Search Stack Overflow</h1>
+          <h1 className="fixed top-0 left-0 text-2xl p-4">
+            Search Stack Overflow
+          </h1>
         </Link>
         <BurgerMenu />
       </div>

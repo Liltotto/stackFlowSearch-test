@@ -1,30 +1,25 @@
 import { useEffect, useState } from "react";
-import SearchForm from "../components/SearchForm";
-import QuestionList from "../components/QuestionList";
-import { searchQuestions } from "../services/stackoverflowService";
 import { MyPagination } from "../components/UI/MyPagination";
 import { getPageCount } from "../utils/helpers/pagesCount";
 import { PAGE_SIZE } from "../utils/constants";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { MainLoader, MiniLoader } from "../components/UI/Loader";
 import { useQuestions } from "../hooks/useQuestions";
+import SearchForm from "../components/SearchForm";
+import QuestionList from "../components/QuestionList";
 
 const HomePage = () => {
   const [activeQuery, setActiveQuery] = useState("");
   const [page, setPage] = useState<number>(1);
   const [filter, setFilter] = useState<boolean | null>(null);
 
-  // const { data, isLoading, isError, isFetching, refetch } = useQuery({
-  //   queryKey: ["questions", activeQuery, page],
-  //   queryFn: () => searchQuestions(activeQuery, page, PAGE_SIZE, filter),
-  //   enabled: false,
-  //   placeholderData: keepPreviousData,
-  // });
-
-  const { questionsData, isLoading, isError, isFetching, refetch } = useQuestions(activeQuery, page, filter);
+  const { questionsData, isLoading, isError, isFetching, refetch } =
+    useQuestions(activeQuery, page, filter);
 
   const questions = questionsData?.items || [];
-  const totalPages = Math.min(15, getPageCount(questionsData?.total!, PAGE_SIZE));
+  const totalPages = Math.min(
+    15,
+    getPageCount(questionsData?.total!, PAGE_SIZE)
+  );
 
   const handleSearch = (newQuery: string, newFilter: boolean | null) => {
     setActiveQuery(newQuery);

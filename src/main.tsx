@@ -6,7 +6,6 @@ import { setupStore } from "./store/store.ts";
 import App from "./App.tsx";
 import "./index.scss";
 
-
 const queryClient = new QueryClient();
 const store = setupStore();
 
